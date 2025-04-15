@@ -3,7 +3,7 @@
 
         <div class="button-container">
             <button class="coffee-button" @click="requestCoffee" :disabled="!isReady">
-                Make Coffee
+                {{ buttonText }}
             </button>
             <div class="led" :class="{ 'led-on': isCoffeeReady }"></div>
         </div>
@@ -23,11 +23,17 @@ import { SimplePool, getPublicKey, finalizeEvent } from 'nostr-tools'
 import { encrypt } from 'nostr-tools/nip04'
 
 const store = useSettingsStore()
+const buttonText = ref('Make Coffee')
 const isCoffeeReady = computed(() => store.isCoffeeReady)
 const isConnected = computed(() => store.isConnected)
 
 watch(isCoffeeReady, (newVal) => {
-    console.log("isCoffeeReady changed to", newVal)
+    if (newVal) {
+        buttonText.value = 'Coffee machine is on'
+        setTimeout(() => {
+            buttonText.value = 'Make Coffee'
+        }, 1000)
+    }
 })
 
 const isReady = computed(() => {
