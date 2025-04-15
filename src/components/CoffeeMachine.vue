@@ -1,14 +1,17 @@
 <template>
     <div class="coffee-machine">
-        <h1>Coffee Machine Controller</h1>
-        <div class="status-box" :class="{ 'connected': isConnected }">
-            {{ isConnected ? 'Connected' : 'Disconnected' }}
-        </div>
+
         <div class="button-container">
             <button class="coffee-button" @click="requestCoffee" :disabled="!isReady">
-                Coffee Me!
+                Make Coffee
             </button>
             <div class="led" :class="{ 'led-on': isCoffeeReady }"></div>
+        </div>
+
+        <div class="status-box" :class="{ 'connected': isConnected }">
+            <p><strong>Status: </strong>
+                <span>{{ isConnected ? 'Ready' : 'Awaiting relay connection' }}</span>
+            </p>
         </div>
     </div>
 </template>
@@ -53,7 +56,7 @@ async function requestCoffee() {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .coffee-machine {
     display: flex;
     flex-direction: column;
@@ -71,16 +74,17 @@ async function requestCoffee() {
 .coffee-button {
     padding: 1.5rem 3rem;
     font-size: 2rem;
-    background-color: #4CAF50;
+    background-color: cornflowerblue;
+    border: 2px solid cornflowerblue;
     color: white;
-    border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .coffee-button:hover {
-    background-color: #45a049;
+    background-color: white;
+    color: cornflowerblue;
 }
 
 .coffee-button:disabled {
@@ -102,16 +106,11 @@ async function requestCoffee() {
 }
 
 .status-box {
-    margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    background-color: #ff4444;
-    color: white;
+    margin-top: 1rem;
     font-weight: bold;
-    transition: background-color 0.3s;
-}
 
-.status-box.connected {
-    background-color: #4CAF50;
+    .connected {
+        background-color: #4CAF50;
+    }
 }
 </style>

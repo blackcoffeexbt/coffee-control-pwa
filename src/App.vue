@@ -62,7 +62,7 @@ onUnmounted(() => {
 <template>
   <div class="app">
     <nav>
-      <router-link to="/">Coffee Machine</router-link>
+      <router-link to="/">Control</router-link>
       <router-link to="/settings">Settings</router-link>
     </nav>
     <router-view></router-view>
@@ -95,6 +95,6 @@ nav a:hover {
 }
 
 nav a.router-link-active {
-  background-color: #4CAF50;
+  background-color: cornflowerblue;
 }
 </style>

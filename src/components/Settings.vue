@@ -3,14 +3,14 @@
         <h2>Settings</h2>
         <div class="settings-form">
             <div class="form-group">
-                <label for="microcontroller-npub">Microcontroller NPUB</label>
+                <label for="microcontroller-npub">Coffee Machine Npub (Hex format)</label>
                 <input id="microcontroller-npub" v-model="microcontrollerNpub" type="text"
-                    placeholder="Enter microcontroller's npub" />
+                    placeholder="Enter microcontroller's npub in hex format" />
             </div>
 
             <div class="form-group">
-                <label for="nsec">Your NSEC (Private Key)</label>
-                <input id="nsec" v-model="nsec" type="password" placeholder="Enter your nsec"
+                <label for="nsec">Your Nsec (Hex format)</label>
+                <input id="nsec" v-model="nsec" type="password" placeholder="Enter your nsec in hex format"
                     :class="{ 'error': nsecError }" />
                 <div v-if="nsecError" class="error-message">{{ nsecError }}</div>
             </div>
@@ -18,11 +18,11 @@
             <div class="form-group">
                 <label for="relay-url">Nostr Relay URL</label>
                 <input id="relay-url" v-model="relayUrl" type="text"
-                    placeholder="Enter relay URL (e.g., wss://relay.damus.io)" />
+                    placeholder="Enter relay URL (e.g., wss://nos.lol)" />
             </div>
 
             <div class="form-group">
-                <label>Your NPUB (Public Key)</label>
+                <label>Your npub</label>
                 <input :value="npub" type="text" readonly class="readonly" />
             </div>
 
@@ -106,7 +106,7 @@ input.error {
 
 .save-button {
     padding: 0.75rem;
-    background-color: #4CAF50;
+    background-color: cornflowerblue;
     color: white;
     border: none;
     border-radius: 4px;
@@ -116,6 +116,6 @@ input.error {
 }
 
 .save-button:hover {
-    background-color: #45a049;
+    background-color: cornflowerblue;
 }
 </style>
