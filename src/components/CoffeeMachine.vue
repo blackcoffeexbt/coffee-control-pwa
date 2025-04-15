@@ -1,6 +1,9 @@
 <template>
     <div class="coffee-machine">
         <h1>Coffee Machine Controller</h1>
+        <div class="status-box" :class="{ 'connected': isConnected }">
+            {{ isConnected ? 'Connected' : 'Disconnected' }}
+        </div>
         <div class="button-container">
             <button class="coffee-button" @click="requestCoffee" :disabled="!isReady">
                 Coffee Me!
@@ -11,13 +14,18 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useSettingsStore } from '../stores/settings'
 import { SimplePool, getPublicKey, finalizeEvent } from 'nostr-tools'
 import { encrypt } from 'nostr-tools/nip04'
 
 const store = useSettingsStore()
 const isCoffeeReady = computed(() => store.isCoffeeReady)
+const isConnected = computed(() => store.isConnected)
+
+watch(isCoffeeReady, (newVal) => {
+    console.log("isCoffeeReady changed to", newVal)
+})
 
 const isReady = computed(() => {
     return store.microcontrollerNpub && store.nsec && store.relayUrl
@@ -91,5 +99,19 @@ async function requestCoffee() {
 .led-on {
     background-color: #4CAF50;
     box-shadow: 0 0 10px #4CAF50;
+}
+
+.status-box {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background-color: #ff4444;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.status-box.connected {
+    background-color: #4CAF50;
 }
 </style>

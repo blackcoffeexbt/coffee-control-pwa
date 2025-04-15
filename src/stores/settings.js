@@ -13,6 +13,7 @@ export const useSettingsStore = defineStore('settings', () => {
   const nsec = ref(loadFromStorage('nsec', ''))
   const relayUrl = ref(loadFromStorage('relayUrl', ''))
   const isCoffeeReady = ref(false)
+  const isConnected = ref(false)
 
   // Generate a new nsec if none exists
   if (!nsec.value) {
@@ -65,15 +66,21 @@ export const useSettingsStore = defineStore('settings', () => {
     isCoffeeReady.value = value
   }
 
+  function setConnected(value) {
+    isConnected.value = value
+  }
+
   return {
     microcontrollerNpub,
     nsec,
     relayUrl,
     npub,
     isCoffeeReady,
+    isConnected,
     setMicrocontrollerNpub,
     setNsec,
     setRelayUrl,
-    setCoffeeReady
+    setCoffeeReady,
+    setConnected
   }
 }) 

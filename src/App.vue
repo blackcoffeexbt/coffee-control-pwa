@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted } from 'vue'
 import { useSettingsStore } from './stores/settings'
 import { SimplePool, getPublicKey } from 'nostr-tools'
+import { decrypt } from 'nostr-tools/nip04'
 
 const store = useSettingsStore()
 let pool = null
@@ -19,13 +20,24 @@ onMounted(() => {
         [store.relayUrl],
         {
           kinds: [4],
-          authors: [store.microcontrollerNpub, getPublicKey(store.nsec)],
-          // '#p': [getPublicKey(store.nsec)],
-          limit: 1
+          authors: [store.microcontrollerNpub],
+          '#p': [getPublicKey(store.nsec)],
+          limit: 0
         },
         {
           onevent(event) {
             console.log('got event:', event)
+            const decrypted = decrypt(store.nsec, event.pubkey, event.content)
+            console.log('decrypted:', decrypted)
+            if (decrypted.toLowerCase().includes("okay")) {
+              store.setCoffeeReady(true)
+              console.log("coffee ready")
+              // Turn off the LED after 5 seconds
+              setTimeout(() => store.setCoffeeReady(false), 5000)
+            }
+          },
+          oneose() {
+            store.setConnected(true)
           }
         }
       )
