@@ -64,6 +64,33 @@ function saveSettings() {
     padding: 2rem;
     max-width: 600px;
     margin: 0 auto;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+@media (prefers-color-scheme: dark) {
+    .settings {
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+
+    input {
+        background-color: #2d2d2d;
+        color: #ffffff;
+        border-color: #444444;
+    }
+
+    input.readonly {
+        background-color: #333333;
+    }
+
+    .error-message {
+        color: #ff6b6b;
+    }
+
+    input.error {
+        border-color: #ff6b6b;
+    }
 }
 
 .settings-form {

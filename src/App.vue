@@ -75,6 +75,12 @@ onUnmounted(() => {
   background-color: #f5f5f5;
 }
 
+@media (prefers-color-scheme: dark) {
+  .app {
+    background-color: #1a1a1a;
+  }
+}
+
 nav {
   background-color: #333;
   padding: 1rem;

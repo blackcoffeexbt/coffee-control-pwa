@@ -68,6 +68,40 @@ async function requestCoffee() {
     flex-direction: column;
     align-items: center;
     padding: 2rem;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+@media (prefers-color-scheme: dark) {
+    .coffee-machine {
+        background-color: #1a1a1a;
+        color: #ffffff;
+    }
+
+    .coffee-button {
+        background-color: #2d2d2d;
+        border-color: #444444;
+        color: #ffffff;
+    }
+
+    .coffee-button:hover {
+        background-color: #444444;
+        color: #ffffff;
+    }
+
+    .coffee-button:disabled {
+        background-color: #333333;
+        border-color: #444444;
+        color: #666666;
+    }
+
+    .led {
+        background-color: #333333;
+    }
+
+    .status-box {
+        color: #ffffff;
+    }
 }
 
 .button-container {
